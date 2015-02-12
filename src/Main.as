@@ -14,7 +14,7 @@ package
         override protected function execute():void
         {
             trace("  here I am");
-            setTimeout(exit, 2000);
+            setTimeout(function():void { exit(0); }, 1000);
         }
 	}
 }

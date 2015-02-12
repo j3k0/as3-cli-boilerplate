@@ -65,12 +65,12 @@ package cli
 			error('You must to override execute');
 		}
 
-		public function exit():void
+		public function exit(status:int = 0):void
 		{
             var exitingEvent:Event = new Event(Event.EXITING, false, true);
             NativeApplication.nativeApplication.dispatchEvent(exitingEvent);
             if (!exitingEvent.isDefaultPrevented()) {
-                NativeApplication.nativeApplication.exit();
+                NativeApplication.nativeApplication.exit(status);
             }
 		}
 

@@ -1,3 +1,8 @@
+help:
+	@echo make run ..... Runs the app
+	@echo make build ... Compiles the app
+	@echo make clean ... Cleanup binaries
+
 build: bin/Main.swf
 
 run: build
