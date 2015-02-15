@@ -5,6 +5,7 @@ package cli
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.InvokeEvent;
+    import flash.events.UncaughtErrorEvent;
 
 	/**
 	 *  @eventType flash.events.Event.COMPLETE
@@ -51,11 +52,22 @@ package cli
 				return exit();
 			}
 
+            // Catch uncaught errors
+            loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR,
+                function(e:UncaughtErrorEvent):void {
+                    e.preventDefault();
+                    trace(e.error.getStackTrace());
+                    exit(1);
+                });
+
+            // Run
 			try {
 				execute();
 			} catch(e:Error) {
 				error(e.toString());
 			}
+
+            // Why?
             addChild(new Sprite());
 		}
 
